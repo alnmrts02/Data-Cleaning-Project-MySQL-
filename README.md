@@ -23,4 +23,45 @@ The dataset "employee layoffs" have the following fields:
 
 ## Process
 ### Importing Data
-Imported the dataset [layoffs] into MySQL database.
+- Imported the dataset [layoffs](https://github.com/alnmrts02/Data-Cleaning-Project-MySQL-/blob/main/layoffs.csv) into MySQL database.
+- Using the Table-Data import wizard, the data was loaded into the database.
+
+### Data Exploration
+- Conducted an initial exploration of the dataset using `SELECT` queries.
+- Identified key data issues such as missing values, duplicates, and inconsistent formats.
+
+### Creating a Staging Database
+- Created a duplicate of the raw dataset to work on the data and to make the required adjustments.
+- Creating a staging database ensures that, in the event of faults or mistakes, the original raw data remains safeguarded.
+```sql
+create table layoffs_staging   
+like layoffs;
+
+INSERT layoffs_staging
+select *
+From layoffs;
+```
+### Standardizing data
+- To remove unwanted spaces from the `company` column.
+```sql
+SELECT company, (TRIM(company))
+FROM layoffs_staging2;
+
+UPDATE layoffs_staging2
+SET company = TRIM(company);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
