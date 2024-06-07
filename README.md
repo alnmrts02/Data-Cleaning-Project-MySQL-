@@ -50,12 +50,46 @@ FROM layoffs_staging2;
 UPDATE layoffs_staging2
 SET company = TRIM(company);
 ```
+- To identify and standardize similar names within `industry` column.
+```sql
+SELECT *
+FROM layoffs_staging2
+WHERE industry LIKE 'Crypto%';
 
+UPDATE layoffs_staging2
+SET industry = 'Crypto'
+WHERE industry LIKE 'Crypto%';
+```  
 
+- Trimming unwanted spaces from `country` column
+```sql
+SELECT country, (TRIM(TRAILING '.' FROM country))
+FROM layoffs_staging2;
 
+UPDATE layoffs_staging2
+SET country = (TRIM(TRAILING '.' FROM country))
+WHERE country LIKE 'United States%';
+```
 
+- Changing the `date` format from text to date
+```sql
+SELECT `date`,
+str_to_date(`date`, '%m/%d/%Y')
+FROM layoffs_staging2;
 
+UPDATE layoffs_staging2
+SET `date` = str_to_date(`date`, '%m/%d/%Y');
 
+ALTER TABLE layoffs_staging2
+MODIFY COLUMN `date` DATE;
+```
+
+### Since some cells are empty it is important to change it to NULL value to reduce complexity
+```sql
+UPDATE layoffs_staging2
+SET industry = NULL 
+WHERE industry = '';
+```
 
 
 
