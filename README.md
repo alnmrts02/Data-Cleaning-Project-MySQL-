@@ -161,7 +161,7 @@ DROP COLUMN row_num;
 ```
 
 ### Cleaned Dataset
-- [cleaned data]()
+- [clean dataset](https://github.com/alnmrts02/Data-Cleaning-Project-MySQL-/blob/main/layoffs%20(cleaned).csv)
 
 
 
